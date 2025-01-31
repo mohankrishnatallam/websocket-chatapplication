@@ -1,0 +1,12 @@
+<div >
+   Welcome {{username}}
+</div>
+<div *ngIf="activeUsers.length === 0" class="sidebar">
+    No active users
+</div>
+
+<div *ngIf="activeUsers.length > 0">
+    <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let user of activeUsers" (click)="onClick(user)">{{ user.sender }}<span class="badge badge-primary badge-pill text-primary" *ngIf="user.unreadMessages > 0">{{ user.unreadMessages }}</span></li>
+    </ul>
+</div>

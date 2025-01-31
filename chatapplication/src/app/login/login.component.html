@@ -1,0 +1,25 @@
+<div class="login-container">
+  <h2>Login</h2>
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" [(ngModel)]="username" required minlength="3" maxlength="20">
+      <div *ngIf="username.invalid && (username.dirty || username.touched)">
+        <div *ngIf="username.errors.required">Username is required.</div>
+        <div *ngIf="username.errors.minlength">Username must be at least 3 characters long.</div>
+        <div *ngIf="username.errors.maxlength">Username cannot exceed 20 characters.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" [(ngModel)]="password" required minlength="6">
+      <div *ngIf="password.invalid && (password.dirty || password.touched)">
+        <div *ngIf="password.errors.required">Password is required.</div>
+        <div *ngIf="password.errors.minlength">Password must be at least 6 characters long.</div>
+      </div>
+    </div>
+    <!-- Submit button with both (ngSubmit) and click event -->
+    
+    <button type="submit" [disabled]="loginForm.invalid" (click)="onSubmit()">Login</button>
+  </form>
+</div>

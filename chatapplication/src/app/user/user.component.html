@@ -1,0 +1,59 @@
+<div class="w-100 p-3">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-2">
+            <div>
+                <app-sidebar [username]="username" [activeUsers]="activeUsers"
+                    (userClicked)="onUserClicked($event)"></app-sidebar>
+            </div>
+        </div>
+        <!-- Content -->
+        <div class="col-md-10">
+            <div *ngIf="!selectedUser">
+                <div class="bg-light p-3">
+                    <h4>No User Selected</h4>
+                </div>
+            </div>
+            <div class="mh-100" *ngIf="selectedUser">
+                <div class="card" style="height: 96vh;">
+                    <div class="card-header">
+                        {{selectedUser.sender}}
+                    </div>
+                    <div class="card-body" style="overflow-y: auto;" #messageBody>
+                        <div *ngFor="let ch of messages" class="message-header">
+                            <div>
+                                <div *ngIf="ch.from===username">
+                                    <div class="d-flex justify-content-end">
+                                        <div class="from-message">{{ch.content}}</div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div >
+                                <div *ngIf="ch.to===username">
+                                    <div class="d-flex">
+                                        <div class="to-message">{{ch.content}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <form (ngSubmit)="onSubmit();heroForm.resetForm()" #heroForm="ngForm" >
+                            <div class="card-footer text-body-secondary">
+                                <div class="input-group ">
+                                    <input type="text" class="form-control" placeholder="Message" name="message"
+                                        [(ngModel)]="message" aria-label="Recipient's username"
+                                        aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="submit">Send</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
